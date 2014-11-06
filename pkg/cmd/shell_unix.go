@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	shell = &unixshell{}
+	osshell = &unixshell{}
 }
 
 type unixshell struct {
