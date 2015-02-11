@@ -27,9 +27,10 @@ type API interface {
 
 // DefaultAPI is the internal concrete implementation of the RedisAPI
 type DefaultAPI struct {
-	Debug    bool
-	redisURL string
-	client   *goredis.Redis
+	Debug bool
+	URL   string
+
+	client *goredis.Redis
 }
 
 // NewDefaultAPI returns a new instance of the API
@@ -44,12 +45,12 @@ func NewDefaultAPI(options ...func(*DefaultAPI)) API {
 	}
 
 	// open the connection and send a ping
-	c, err := goredis.DialURL(api.redisURL)
-	if err != nil && api.Debug {
+	c, err := goredis.DialURL(api.URL)
+	if err != nil {
 		panic("Could not open the Redis data store: " + err.Error())
 	}
 	api.client = c
-	if err := c.Ping(); err != nil && api.Debug {
+	if err := api.client.Ping(); err != nil {
 		panic("Could not PING the redis data store: " + err.Error())
 	}
 
