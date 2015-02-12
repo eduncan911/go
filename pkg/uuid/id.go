@@ -77,7 +77,7 @@ func (id ID) String() string {
 // ParseID parses the specified string version of ID and returns an ID or an Error
 func ParseID(value string) (id ID, err error) {
 	if len(value) == 0 {
-		err = fmt.Errorf("Invalid id: value is empty")
+		err = fmt.Errorf("Invalid id on parsing: string value is empty")
 		return
 	}
 
